@@ -5,12 +5,16 @@
 <table>
 {% for item in todos %}
     <tr>
+        {% autoescape false %}
         <td>{{ item['content'] }}</td>
+        {% endautoescape %}
         <td>{{ item['date'] }}</td>
     </tr>
+
 {% endfor %}
     </table>
 {% endif %}
+
 <br>
 <form method="post">
     <label for="content">Todo</label>
