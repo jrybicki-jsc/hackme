@@ -1,0 +1,17 @@
+<html>
+<head>
+    <title>Login page</title>
+</head>
+<body>
+<h1>Please login to proceed</h1>
+{% include 'flash.html' %}
+<form method="post">
+   <label for="username">Username</label>
+   <input id="username" maxlength="22" name="username" placeholder="username" type="text" value="">
+    <label class="col-sm-2 control-label" for="password">Password</label>
+    <input id="password" maxlength="20" name="password" placeholder="password" type="password" value="">
+
+    <button type="submit">Sign in</button>
+</form>
+</body>
+</html>
