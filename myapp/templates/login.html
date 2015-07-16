@@ -1,8 +1,6 @@
-<html>
-<head>
-    <title>Login page</title>
-</head>
-<body>
+{% extends "layout.html" %}
+{% block content %}
+
 <h1>Please login to proceed</h1>
 {% include 'flash.html' %}
 <form method="post">
@@ -13,5 +11,5 @@
 
     <button type="submit">Sign in</button>
 </form>
-</body>
-</html>
+
+{% endblock %}

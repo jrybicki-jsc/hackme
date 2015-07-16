@@ -1,12 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Welcome to Hackme</title>
-</head>
-<body>
-<h1>Hello world!</h1>
-{% include 'flash.html' %}
-<a href="{{ url_for('secret') }}">Proceed to secret area</a>
-</body>
-</html>
+{% extends "layout.html" %}
+{% block content %}
+{% if todos %}
+<h2>Todo List</h2>
+<table>
+{% for item in todos %}
+    <tr>
+        <td>{{ item['content'] }}</td>
+        <td>{{ item['date'] }}</td>
+    </tr>
+{% endfor %}
+    </table>
+{% endif %}
+<br>
+<form method="post">
+    <label for="content">Todo</label>
+    <input id="content" maxlength="22" name="content" placeholder="content" type="text" value="">
+    <button type="submit">Add</button>
+</form>
+<br>
+{% endblock %}
