@@ -12,6 +12,11 @@
 {% else %}
 <a href="{{ url_for('login') }}">Login</a>
 {% endif %}
+&nbsp;
+<form style='display:inline;' action="{{ url_for('search') }}" method="get">
+    <input type="text" value="search" name="term">
+    <input type="submit" value="search">
+</form>
 
 {% include 'flash.html' %}
 

@@ -28,6 +28,13 @@ def secret():
     return render_template('secret.html')
 
 
+@app.route('/search/', methods=['GET'])
+def search():
+    term = request.args.get('term')
+    return "<html><body><h1>Search results for %s</h1>Search is " \
+           "not yet supported</body></html>" % term
+
+
 @app.route('/login/', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
