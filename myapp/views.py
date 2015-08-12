@@ -2,23 +2,23 @@ from myapp import app, login_manager
 from flask import request, render_template, redirect, url_for, flash
 from flask.ext.login import login_required, login_user, logout_user
 from datetime import datetime
-
-todos = list()
+import sqlite3
 
 
 @app.before_first_request
 def init_todos():
-    global todos
-    todos.append({'date': datetime.now().strftime('%x'),
-                  'content': 'important news'})
+   execute_query('''CREATE TABLE records (date text, content text)''')
 
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
-    global todos
     if request.method == 'POST':
-        todos.append({'date': datetime.now().strftime('%x'),
-                      'content': request.form['content']})
+        query = "INSERT INTO records VALUES('%s', '%s')" % (
+            datetime.now().strftime('%x'),
+            request.form['content'])
+        execute_query(query)
+    c = execute_query('SELECT * FROM records')
+    todos = c.fetchall()
     return render_template('index.html', todos=todos)
 
 
@@ -62,6 +62,11 @@ def logout():
 def load_user(userid):
     return User(userid, userid)
 
+
+def execute_query(query):
+    db = sqlite3.connect('todos.db')
+    with db:
+        return db.execute(query)
 
 class User(object):
     def __init__(self, name, password):

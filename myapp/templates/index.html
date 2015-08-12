@@ -6,9 +6,9 @@
 {% for item in todos %}
     <tr>
         {% autoescape false %}
-        <td>{{ item['content'] }}</td>
+        <td>{{ item[0] }}</td>
         {% endautoescape %}
-        <td>{{ item['date'] }}</td>
+        <td>{{ item[1] }}</td>
     </tr>
 
 {% endfor %}

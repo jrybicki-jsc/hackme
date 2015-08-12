@@ -14,7 +14,7 @@
 {% endif %}
 &nbsp;
 <form style='display:inline;' action="{{ url_for('search') }}" method="get">
-    <input type="text" value="search" name="term">
+    <input type="text" name="term">
     <input type="submit" value="search">
 </form>
 
@@ -23,6 +23,5 @@
 {% block content %}
 
 {% endblock %}
-
 </body>
 </html>
