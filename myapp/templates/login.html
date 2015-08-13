@@ -1,8 +1,6 @@
 {% extends "layout.html" %}
 {% block content %}
-
 <h1>Please login to proceed</h1>
-{% include 'flash.html' %}
 <form method="post">
    <label for="username">Username</label>
    <input id="username" maxlength="22" name="username" placeholder="username" type="text" value="">
@@ -11,5 +9,4 @@
 
     <button type="submit">Sign in</button>
 </form>
-
 {% endblock %}

@@ -1,23 +1,28 @@
 from myapp import app, login_manager
 from flask import request, render_template, redirect, url_for, flash
-from flask.ext.login import login_required, login_user, logout_user
+from flask.ext.login import login_required, login_user, logout_user, \
+    current_user
 from datetime import datetime
 import sqlite3
 
 
 @app.before_first_request
 def init_todos():
-   execute_query('''CREATE TABLE records (date text, content text)''')
+    execute_query('''CREATE TABLE IF NOT EXISTS records (date text, content text,
+    owner text)''')
 
 
 @app.route('/', methods=['GET', 'POST'])
+@login_required
 def index():
     if request.method == 'POST':
-        query = "INSERT INTO records VALUES('%s', '%s')" % (
+        query = "INSERT INTO records VALUES('%s', '%s', '%s')" % (
             datetime.now().strftime('%x'),
-            request.form['content'])
+            request.form['content'],
+            current_user.name)
         execute_query(query)
-    c = execute_query('SELECT * FROM records')
+    c = execute_query("SELECT * FROM records WHERE owner='%s'" %
+                      current_user.name)
     todos = c.fetchall()
     return render_template('index.html', todos=todos)
 
@@ -31,8 +36,11 @@ def secret():
 @app.route('/search/', methods=['GET'])
 def search():
     term = request.args.get('term')
-    return "<html><body><h1>Search results for %s</h1>Search is " \
-           "not yet supported</body></html>" % term
+    query = "SELECT * FROM records WHERE content LIKE '%%%s%%'" % term
+    print "Executing %s" % query
+    res = execute_query(query)
+    return "<html><body><h1>Search result for %s</h1>%s</body></html>" % (
+        term, res.fetchall())
 
 
 @app.route('/login/', methods=['GET', 'POST'])
@@ -67,6 +75,7 @@ def execute_query(query):
     db = sqlite3.connect('todos.db')
     with db:
         return db.execute(query)
+
 
 class User(object):
     def __init__(self, name, password):
