@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 {% block content %}
-{% if todos %}
 <h2>Todo List</h2>
+{% if todos %}
 <table>
 {% for item in todos %}
     <tr>
@@ -19,6 +19,13 @@
     <label for="content">Todo</label>
     <input id="content" maxlength="22" name="content" placeholder="content" type="text" value="">
     <button type="submit">Add</button>
+</form>
+<br>
+<h3>Upload</h3>
+<form method="post" action="{{ url_for('uploader') }}" enctype="multipart/form-data">
+    <label for="todos">File</label>
+    <input id="todos" name="file" type="file">
+    <button type="submit">Upload</button>
 </form>
 <br>
 {% endblock %}

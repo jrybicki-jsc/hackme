@@ -1,0 +1,12 @@
+<xml>
+ <todo-list>
+     <todo>
+         <date>22/05/15</date>
+         <content>Feed the dogs</content>
+     </todo>
+     <todo>
+         <date>25/07/15</date>
+         <content>Buy bread</content>
+     </todo>
+ </todo-list>
+</xml>
