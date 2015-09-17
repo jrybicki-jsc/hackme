@@ -9,40 +9,37 @@ from parser import TODOListHandler
 
 
 @app.before_first_request
-def init_todos():
+def init():
     execute_query('''CREATE TABLE IF NOT EXISTS records (date text, content text,
     owner text)''')
-
-
-def add_todo(date, content, owner):
-    query = "INSERT INTO records VALUES('%s', '%s', '%s')" % \
-            (date, content, owner)
-    execute_query(query)
 
 
 @app.route('/', methods=['GET', 'POST'])
 @login_required
 def index():
+    # adding a item to the list
     if request.method == 'POST':
         add_todo(datetime.now().strftime('%x'),
                  request.form['content'],
                  current_user.name)
 
+    # showing all items
     c = execute_query("SELECT * FROM records WHERE owner='%s'" %
                       current_user.name)
-    todos = c.fetchall()
-    return render_template('index.html', todos=todos)
+    return render_template('index.html', todos=c.fetchall())
 
 
 @app.route('/secret/')
 @login_required
 def secret():
+    # secret area only for logged-in users
     return render_template('secret.html')
 
 
 @app.route('/uploader/', methods=['POST'])
 @login_required
 def uploader():
+    # massive upload of items in a xml file (check todos.xml for an example)
     import xml.sax
     p = TODOListHandler()
     try:
@@ -57,6 +54,7 @@ def uploader():
 
 @app.route('/search/', methods=['GET'])
 def search():
+    # searching in the list
     term = request.args.get('term')
     query = "SELECT * FROM records WHERE content LIKE '%%%s%%'" % term
     print "Executing %s" % query
@@ -67,6 +65,7 @@ def search():
 
 @app.route('/login/', methods=['GET', 'POST'])
 def login():
+    # login request
     if request.method == 'POST':
         next = request.args.get('next')
         name = request.form['username']
@@ -77,7 +76,7 @@ def login():
             return redirect(next or url_for('index'))
         else:
             flash('Wrong login')
-
+    # get
     return render_template('login.html')
 
 
@@ -93,12 +92,20 @@ def load_user(userid):
     return User(userid, userid)
 
 
+# database handling
+def add_todo(date, content, owner):
+    query = "INSERT INTO records VALUES('%s', '%s', '%s')" % \
+            (date, content, owner)
+    execute_query(query)
+
+
 def execute_query(query):
     db = sqlite3.connect('todos.db')
     with db:
         return db.execute(query)
 
 
+# class representing users
 class User(object):
     def __init__(self, name, password):
         super(User, self).__init__()
