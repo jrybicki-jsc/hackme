@@ -9,14 +9,15 @@ vulnerable application for teaching purposes
 ## Running the application
 
 1. Create virtual environment
-
-      virtualenv env
-      source env/bin/activate
-
-1. Install dependencies
-
-      pip install -r requirements.txt
-
-1. Run application:
-
-      ./run.py
+```
+virtualenv env
+source env/bin/activate
+```
+2. Install dependencies
+```
+pip install -r requirements.txt
+```
+3. Run application:
+```
+./run.py
+```
