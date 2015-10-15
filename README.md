@@ -1,13 +1,17 @@
 # hackme
-vulnerable application for teaching purposes
+Vulnerable application for teaching purposes
 
-## Important declaimer
+## Important disclaimer
  
  This application is not secure, running it on your computer might cause 
  serious problems. Don't do it unless you know what you are doing!
 
 ## Running the application
-
+### Check out the repository
+```
+git clone https://github.com/httpPrincess/hackme/
+cd hackme
+```
 ### Create virtual environment
 ```
 virtualenv env
