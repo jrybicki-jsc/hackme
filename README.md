@@ -6,6 +6,15 @@ Vulnerable application for teaching purposes
  This application is not secure, running it on your computer might cause 
  serious problems. Don't do it unless you know what you are doing!
 
+## Application vulnerabilities
+Application includes (but is not limited) following vulnerabilities:
+ 1. Open redirect
+ 2. Cross-site request forgery
+ 3. Insecure direct object reference
+ 4. XSS
+ 5. Injection (various types)
+ 6. Security configuration 
+
 ## Running the application
 ### Check out the repository
 ```
@@ -44,12 +53,3 @@ to make a http query
 curl -X GET 0.0.0.0:8080
 ```
 If you don't get a response (302) for such a query something is wrong with your deployment
-
-## Application vulnerabilities
-Application includes (but is not limited) following vulnerabilities:
- 1. Open redirect
- 2. Cross-site request forgery
- 3. Insecure direct object reference
- 4. XSS
- 5. Injection (various types)
- 6. Security configuration 
