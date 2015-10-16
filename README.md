@@ -13,7 +13,7 @@ Application includes (but is not limited) following vulnerabilities:
  3. Insecure direct object reference
  4. XSS
  5. Injection (various types)
- 6. Security configuration 
+ 6. Security misconfiguration 
 
 ## Running the application
 ### Check out the repository
