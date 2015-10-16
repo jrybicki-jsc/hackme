@@ -53,3 +53,25 @@ to make a http query
 curl -X GET 0.0.0.0:8080
 ```
 If you don't get a response (302) for such a query something is wrong with your deployment
+
+## Using the application
+You should not use this application for any non-educational purposes! 
+
+This application is a todo list managing platform. To log-in use any credentials where name and 
+password are equal. You can add todos to your list, search through the list, and perform mass 
+upload of todos with a XML files in form:
+```
+<xml>
+ <todo-list>
+     <todo>
+         <date>22/05/15</date>
+         <content>Feed the dogs</content>
+     </todo>
+     <todo>
+         <date>25/07/15</date>
+         <content>Buy bread</content>
+     </todo>
+ </todo-list>
+</xml>
+
+```
